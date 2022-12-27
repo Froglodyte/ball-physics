@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Physics</title>
+</head>
+<body>
+    <section id = "mobile-blocker">
+        <div>
+            <h1> SITE NOT READY FOR MOBILE DEVICES (YET)</h1>
+            <h3>please visit on desktop or  laptop</h3>
+        </div>
+    </section>
+    <section id = "main">
+        <div id = "ballInfo">
+            <span id="ballPos">
+                position[
+                <span class = "infoCont">
+                    <span class = "info" id = "xCoord"></span>
+                    <span class = "info" id ="yCoord"></span>
+                </span>
+                ]
+            </span>
+            <span id="ballVel">
+                velocity[
+                <span class = "infoCont">
+                    <span class = "info" id = "xVel"></span> 
+                    <span class = "info" id ="yVel"></span>
+                </span>
+                ]
+            </span>
+        </div>
+        <canvas id = "room"></canvas>
+        <div id = "menu">
+            <div class = "stat">
+                <div class = "statValueCont"> 0 < <input class="statValues" id="gravity" oninput="valueEnforcer(0, 1, 'gravity')" onkeypress = "return isValid(event)"></input> < 1 </div>
+                gravity
+            </div>
+            <div class = "stat">
+                <div class = "statValueCont"> 0 < <input class="statValues" id="bounce" oninput="valueEnforcer(0, 1, 'bounce')" onkeypress = "return isValid(event)"></input> < 1 </div> 
+                bounce
+            </div>
+            <div class = "stat">
+                <div class = "statValueCont"> 1.0 < <input class="statValues" id="friction" oninput="valueEnforcer(1.0, 1.1, 'friction')" onkeypress = "return isValid(event)"></input> < 1.1 </div>
+                friction
+            </div>
+            <div class = "stat">
+                <div class = "statValueCont"> 0 < <input class="statValues" id="jumpHeight" oninput="valueEnforcer(0, 30, 'jumpHeight')" onkeypress = "return isValid(event)"></input> < 30 </div>
+                jump-height
+            </div>
+            <div class = "stat">
+                <div class = "statValueCont"> 1 < <input class="statValues" id="radius" oninput="valueEnforcer(1, 40, 'radius')" onkeypress = "return isValid(event)"></input> < 40 </div>
+                radius
+            </div>
+        </div>
+    </section>
+</body>
+</html>

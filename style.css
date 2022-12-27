@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital@1&family=Roboto+Mono:wght@400;600&display=swap');
+:root{
+    --color-crd: #FDFFF7;
+    --color-bg: #191716;
+    --color-accent-1: #B2ABF2;
+    --color-accent-2: #ED6A5A;
+    --shadow-color: 20deg 11% 2%;
+    --color-subtle-info: rgba(253, 255, 247, 0.50);
+}
+
+body{
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-bg);
+    display: grid;
+    place-items: center;
+}
+
+#mobile-blocker{
+    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    margin: none;
+    padding: none;
+}
+
+#room{
+    height: 80vh;
+    aspect-ratio: 16/9;
+    padding: 0;
+    background-color: var(--color-crd);
+    border-radius: 1vh;
+    box-shadow:
+    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+    0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
+    2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
+    5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
+    overflow: hidden;
+}
+
+#menu{
+    height: 10vh;
+    border-radius: 1vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat{
+    color: rgba(253, 255, 247, 0.75);
+    text-align: center;
+    margin: auto;
+    font-family: "roboto mono", monospace;
+    font-weight: 400;
+    cursor: default;
+}
+
+.statValues{
+    color: var(--color-accent-2);
+    font-weight: 600;
+    font-family: "roboto mono", monospace;
+    font-style: normal;
+    margin: auto;
+    transition: 0.2s all;
+    cursor: text;
+    width: 4ch;
+    border-bottom: 2px solid var(--color-accent-2);
+    padding-bottom: 1px;
+    margin-block: 1px;
+}
+
+.statValues:focus, .statValues:hover{
+    color: var(--color-accent-1);
+    border-bottom: 2px solid var(--color-accent-1);
+}
+
+.statValueCont{
+    color: var(--color-subtle-info);
+    font-family: "DM Mono";
+    font-weight: 500;
+    font-style: italic;
+}
+
+input{
+    all: unset
+}
+
+#ballInfo{
+    width: 100%;
+    color: var(--color-subtle-info);
+    font-family: "DM Mono", monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-style: italic;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoCont{
+    font-style: bold;
+    display: inline-block;
+    width: 16ch;
+    max-width: 16ch;
+    min-width: 16ch;
+    display: inline-flex;
+    justify-content: space-around;
+}
+.info{
+    text-align: left;
+    width: 7ch;
+    max-width: 7ch;
+    min-width: 7ch;
+    font-family: "roboto mono", monospace;
+    font-weight: 600;
+}
+
+#ballPos, #ballVel{
+    padding-inline: 1vh;
+    width: 20%;
+    max-width: 20%;
+    min-width: 20%;
+    cursor: default;
+}
+
+#ballVel{
+    text-align: right
+}
+
+#ballVel:hover, #ballPos:hover{
+    color: var(--color-accent-1)
+}
+
+@media only screen and (max-width: 1024px) {
+    #mobile-blocker{
+        display: grid;
+        place-items: center;
+        height: calc(100vh - 2ch);
+        width: calc(100% - 2ch);
+        padding: 1ch;
+        text-align: center;
+        overflow: hidden;
+    }
+    h1{
+        font-size: 1.5rem;
+        font-family: "roboto mono";
+        color: var(--color-accent-2);
+    }
+    h3{
+        font-size: 1rem;
+        font-family: "DM mono";
+        color: var(--color-crd);
+    }
+    #main{
+        display: none;
+        position: absolute;
+    }
+  }
