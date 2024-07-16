@@ -16,6 +16,9 @@ let terminalVel = 20
 let friction = 1.02
 let groundFriction = 1.02
 
+let refRate = 0
+let tFctr = 0
+
 let mouse = {
     x: 0, 
     y: 0, 
@@ -67,7 +70,7 @@ class Ball {
         this.velocity.x /= friction
 
         //ground collision detection
-        if(this.position.y + radius + this.velocity.y < canvas.height){
+        if(this.position.y + radius + this.velocity.y <= canvas.height){
             this.velocity.y += gravity
             isOnGround = false
             friction = 1
@@ -93,8 +96,8 @@ class Ball {
             this.position.x = canvas.width - radius;
         }
 
-        if(isKeyPressed.a && this.velocity.x > -radius && Math.abs(this.velocity.x) < terminalVel) this.velocity.x -= xAcc
-        if(isKeyPressed.d && this.velocity.x < radius && Math.abs(this.velocity.x) < terminalVel) this.velocity.x += xAcc
+        if(isKeyPressed.a && (this.velocity.x > -radius) && (Math.abs(this.velocity.x) < terminalVel)) this.velocity.x -= xAcc
+        if(isKeyPressed.d && (this.velocity.x < radius) && (Math.abs(this.velocity.x) < terminalVel)) this.velocity.x += xAcc
         if(isKeyPressed.w && isOnGround) this.velocity.y = -jumpHeight
         if(isKeyPressed.s && !isOnGround) this.velocity.y += gravity*2
 
@@ -136,7 +139,14 @@ const ball = new Ball({
 
 //animation
 function animate(){
+
+    if (tFctr > 1 && refRate%tFctr != 0){
+        return
+    }
+
     window.requestAnimationFrame(animate)
+
+    refRate++
 
     ctx.fillStyle = "#FDFFF7"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -149,9 +159,13 @@ function animate(){
 
     document.getElementById("xVel").innerText = "X: " + Math.round(ball.velocity.x)
     document.getElementById("yVel").innerText = "Y: " + Math.round(ball.velocity.y)
-
 }
 animate()
+
+setTimeout(()=>{
+    tFctr = Math.round(refRate/60)
+    console.log([tFctr, refRate])
+}, 1000)
 
 window.addEventListener("keydown", (event) => {
     switch (event.key) {
@@ -206,9 +220,33 @@ document.onmouseup = function(){ mouse.isDown = false }
 //input validation
 function valueEnforcer(min, max, id){
     let targetElem = document.getElementById(id)
+    let targetVal = parseFloat(targetElem.value)
 
-    if(targetElem.value < min || targetElem.value > max || targetElem.value.length > 4){
-        targetElem.value = targetElem.value.slice(0, targetElem.value.length - 1)
+    if(targetVal < min || targetVal > max || targetElem.value.length > 4){
+        targetElem.value = targetVal = targetElem.value.slice(0, targetElem.value.length - 1)
+    }
+    if(targetElem.value.length < 1){
+        targetElem.value = targetVal = min
+    }
+    if(targetVal > max){
+        targetElem.value = targetVal = max
+    }
+    if(targetVal < min){
+        targetElem.value = targetVal = min
+    }
+    switch(id){
+        case 'gravity': 
+            gravity = targetVal
+        break
+        case 'bounce': 
+            bounce = targetVal
+        break
+        case 'jumpHeight': 
+            jumpHeight = targetVal
+        break
+        case 'radius': 
+            radius = targetVal
+        break
     }
 }
 
