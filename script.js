@@ -16,9 +16,6 @@ let terminalVel = 20
 let friction = 1.02
 let groundFriction = 1.02
 
-let refRate = 0
-let tFctr = 0
-
 let mouse = {
     x: 0, 
     y: 0, 
@@ -139,14 +136,7 @@ const ball = new Ball({
 
 //animation
 function animate(){
-
-    if (tFctr > 1 && refRate%tFctr != 0){
-        return
-    }
-
     window.requestAnimationFrame(animate)
-
-    refRate++
 
     ctx.fillStyle = "#FDFFF7"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -161,11 +151,6 @@ function animate(){
     document.getElementById("yVel").innerText = "Y: " + Math.round(ball.velocity.y)
 }
 animate()
-
-setTimeout(()=>{
-    tFctr = Math.round(refRate/60)
-    console.log([tFctr, refRate])
-}, 1000)
 
 window.addEventListener("keydown", (event) => {
     switch (event.key) {
