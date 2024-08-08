@@ -16,14 +16,15 @@ let terminalVel = 20
 let friction = 1.02
 let groundFriction = 1.02
 
+let refRate = 0
+let refHold = true
+let refFactor;
+
 let mouse = {
     x: 0, 
     y: 0, 
     isDown: false
 }
-
-let currentEvent = 0
-let prevEvent = 0;
 
 let isBallPressed = false
 let isInBounds = true
@@ -138,6 +139,10 @@ const ball = new Ball({
 function animate(){
     window.requestAnimationFrame(animate)
 
+    if (refHold){
+        refRate++
+    }
+
     ctx.fillStyle = "#FDFFF7"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -151,6 +156,15 @@ function animate(){
     document.getElementById("yVel").innerText = "Y: " + Math.round(ball.velocity.y)
 }
 animate()
+
+//refresh rate finder
+setTimeout(()=>{
+    refHold = false;
+    console.log(refRate)
+    refFactor = refRate/60
+    gravity = gravity/refFactor
+    xAcc = xAcc/refFactor
+}, 1000)
 
 window.addEventListener("keydown", (event) => {
     switch (event.key) {
