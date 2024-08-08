@@ -235,16 +235,16 @@ function valueEnforcer(min, max, id){
     }
     switch(id){
         case 'gravity': 
-            gravity = targetVal
+            gravity = Number(targetVal)
         break
         case 'bounce': 
-            bounce = targetVal
+            bounce = Number(targetVal)
         break
         case 'jumpHeight': 
-            jumpHeight = targetVal
+            jumpHeight = Number(targetVal)
         break
         case 'radius': 
-            radius = targetVal
+            radius = Number(targetVal)
         break
     }
 }
