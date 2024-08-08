@@ -160,7 +160,6 @@ animate()
 //refresh rate finder
 setTimeout(()=>{
     refHold = false;
-    console.log(refRate)
     refFactor = refRate/60
     gravity = gravity/refFactor
     xAcc = xAcc/refFactor
