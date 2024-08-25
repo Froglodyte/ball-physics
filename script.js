@@ -5,9 +5,9 @@ canvas.width = 1024
 canvas.height = 576
 
 //info about room
-let gravity = 0.75
-let bounce = 0.60
-let jumpHeight = 15
+let gravity = 0.80
+let bounce = 0.75
+let jumpHeight = 20
 let isOnGround = false
 let xAcc = 0.4
 let radius = 30
@@ -160,7 +160,7 @@ animate()
 //refresh rate finder
 setTimeout(()=>{
     refHold = false;
-    refFactor = refRate/60
+    refFactor = Math.round(refRate/60)
     gravity = gravity/refFactor
     xAcc = xAcc/refFactor
 }, 1000)
@@ -223,7 +223,7 @@ function valueEnforcer(min, max, id){
     if(targetVal < min || targetVal > max || targetElem.value.length > 4){
         targetElem.value = targetVal = targetElem.value.slice(0, targetElem.value.length - 1)
     }
-    if(targetElem.value.length < 1){
+    if(targetElem.value.length == 0){
         targetElem.value = targetVal = min
     }
     if(targetVal > max){
